@@ -1,0 +1,100 @@
+@import 'lesshat';
+
+@red: red;
+@black: black;
+
+@sharingan-size: 286px;
+@inset-size: floor(@sharingan-size * 0.53);
+@inset-center-size: floor(@inset-size / 5);
+@spa-size: @inset-size / 2;
+
+* { .box-sizing(border-box); }
+
+html, body {
+  margin: auto;
+  .size(100%);
+}
+
+body {
+  display: table;
+  background-color: gray;
+  color: #fff;
+}
+
+main {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#sharingan {
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+  border: 16px solid black;
+  .border-radius(150%);
+  .size(@sharingan-size);
+  background-color: red;
+  .animation(sharingan 2s linear infinite);
+  
+  .inset {
+    position: absolute;
+    z-index: 32;
+    top: 50%;
+    left: 50%;
+    margin-top: -@inset-size / 2;
+    margin-left: -@inset-size / 2;
+    .border-radius(50%);
+    .size(@inset-size);
+    background-color: @black;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 64;
+      top: 50%;
+      left: 50%;
+      margin-top: -@inset-center-size / 2;
+      margin-left: -@inset-center-size / 2;
+      .border-radius(50%);
+      .size(@inset-center-size);
+      background-color: @red;
+    }
+  }
+  
+  .spa {
+    position: absolute;
+    z-index: 0;
+    .size(@spa-size);
+    background-color: @black;
+  }
+  
+  .sup {
+    top: 0;
+    left: 50%;
+    margin-left: -@spa-size / 2;
+  }
+  
+  .izq {
+    bottom: 15%;
+    left: 0;
+    .rotate(60deg);
+  }
+  
+  .der {
+    bottom: 15%;
+    right: 0;
+    .rotate(-60deg);
+  }
+}
+
+.kf(@name, @rules) {
+    @-webkit-keyframes @name { @rules(); }
+    @keyframes @name { @rules(); }
+}
+
+.kf(sharingan, {
+  100% {
+    .rotate(360deg);
+  }
+});
